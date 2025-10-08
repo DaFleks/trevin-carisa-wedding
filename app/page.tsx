@@ -1,6 +1,10 @@
-import Container from "@/components/Container";
-import Image from "next/image";
+
+import HeroSection from "@/components/HeroSection";
 
 export default function Home() {
-  return <Container></Container>;
+  return (
+    <>
+      <HeroSection />
+    </>
+  );
 }
