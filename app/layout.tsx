@@ -1,15 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Montserrat } from "next/font/google";
+
 import Container from "@/components/aetherium/Container";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+import "./globals.css";
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
@@ -25,8 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black`}>
-        <Container className="overflow-y-scroll h-full border-12 xl:w-1/3 xl:mx-auto">{children}</Container>
+      <body className={`${montserrat.className} antialiased bg-black bg-cover xl:bg-[url('/images/Trevin-13.jpg')]`}>
+        <Container className="overflow-y-scroll h-full border-4 border-white  xl:w-1/3 xl:mx-auto xl:border-0 xl:shadow-lg xl:shadow-black text-white">
+          {children}
+        </Container>
       </body>
     </html>
   );
