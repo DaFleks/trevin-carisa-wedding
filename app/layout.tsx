@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${montserrat.className} antialiased bg-black bg-cover xl:bg-[url('/images/Trevin-13.jpg')]`}>
-        <Container className="overflow-y-scroll h-full border-4 border-white  xl:w-1/3 xl:mx-auto xl:border-0 xl:shadow-lg xl:shadow-black text-white">
+        <Container className="overflow-y-scroll h-full border-4 border-white  xl:w-1/3 xl:mx-auto xl:border-0 xl:shadow-lg xl:shadow-black text-white [text-shadow:_2px_2px_8px_rgba(0,0,0,0.5)]">
           {children}
         </Container>
       </body>

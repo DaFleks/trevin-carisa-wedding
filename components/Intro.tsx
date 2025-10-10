@@ -53,7 +53,7 @@ const Intro = (props: IntroProps) => {
         alt="An image of the groom Trevin John with his arms folded."
         fill
         objectFit="cover"
-        className="scale-300 origin-top translate-x-5 -translate-y-10 overflow-hidden"
+        className="scale-275 origin-top translate-x-[15%] -translate-y-[35%] overflow-hidden"
         initial={{ y: 0, opacity: 0 }}
         animate={trevControls}
       />
@@ -62,7 +62,7 @@ const Intro = (props: IntroProps) => {
         alt="An image of the bride Carisa Rodrigues looking off into the distance."
         fill
         objectFit="cover"
-        className="scale-175 origin-top translate-x-18"
+        className="scale-175 origin-top translate-x-[10%]"
         initial={{ y: 0, opacity: 0 }}
         animate={carisaControls}
       />

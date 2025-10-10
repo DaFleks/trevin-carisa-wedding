@@ -64,14 +64,14 @@ export default function Home() {
       </Category>
 
       <Section imageSrc={sectionTwo.src} imagePosition="45% 100%" className="text-center pt-36 pb-12">
-        <Text className="text-sm mb-8">BOTH THE CEREMONY & RECEPTION WILL TAKE PLACE AT:</Text>
+        <Text className="text-sm mb-8 font-bold">BOTH THE CEREMONY & RECEPTION WILL TAKE PLACE AT:</Text>
         <Location className="mb-16" name="Ascott Parc Event Centre" street="2839 RUTHERFORD ROAD" city="VAUGHAN, ON" />
 
-        <Text className="text-sm mb-8">OUR CEREMONY WILL BE HELD AT:</Text>
+        <Text className="text-sm mb-8 font-bold">OUR CEREMONY WILL BE HELD AT:</Text>
         <h1 className={`text-5xl mb-4 ${tangerine.className}`}>The Garden Gazebo</h1>
         <h3 className="text-xl mb-16 font-semibold">AT 4:00 PM</h3>
 
-        <Text className="text-sm mb-8">FOLLOWED BY COCKTAIL HOUR AND DINNER AT:</Text>
+        <Text className="text-sm mb-8 font-bold">FOLLOWED BY COCKTAIL HOUR AND DINNER AT:</Text>
         <h1 className={`text-5xl mb-16 ${tangerine.className}`}>The Trillium Hall</h1>
 
         <button className="border px-8 py-4 mb-4 w-full font-bold hover:bg-neutral-900 hover:text-white duration-100 cursor-pointer mn">

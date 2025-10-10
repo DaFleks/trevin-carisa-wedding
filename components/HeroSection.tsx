@@ -51,7 +51,7 @@ const HeroSection = () => {
   return (
     <>
       {isIntroPlaying && <Intro handleIsIntroAlmostComplete={handleIsIntroAlmostComplete} handleIsIntroPlaying={handleIsIntroPlaying} />}
-      <Container as="section" className="z-40 relative h-full bg-cover text-white [text-shadow:_2px_2px_8px_rgba(0,0,0,0.5)]">
+      <Container as="section" className="z-40 relative h-full bg-cover">
         <Image
           src={heroImage.src}
           alt="An image of the soon to be married couple Trevin and Carisa walking and laughing."
