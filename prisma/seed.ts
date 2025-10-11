@@ -1,5 +1,6 @@
-import { PrismaClient, Prisma } from "../lib/generated/prisma";
+
 import * as guests from "@/lib/guestData.json";
+import { Prisma, PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
