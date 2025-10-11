@@ -19,8 +19,8 @@ const guestListDefaultValues = {
   firstName: "",
   lastName: "",
   email: "",
-  isAttending: "",
-  isBringingPlusOne: "",
+  isAttending: "no",
+  isBringingPlusOne: "no",
   mealOptions: "",
   streetAddress: "",
   phoneNumber: "",
@@ -31,24 +31,28 @@ const guestListDefaultValues = {
 };
 
 const GuestlistForm = (props: GuestlistFormProps) => {
-  const [formData, setFormData] = useState(props.guest ? props.guest : guestListDefaultValues);
+  const [formData, setFormData] = useState(
+    props.guest
+      ? {
+          ...props.guest,
+          isAttending: props.guest.isAttending ? "yes" : "no",
+          isBringingPlusOne: props.guest.isBringingPlusOne ? "yes" : "no",
+        }
+      : guestListDefaultValues
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const method = props.guest ? "PATCH" : "POST";
     const response = await fetch("/api/guestlist/", { method: method, body: JSON.stringify(formData) });
     const data = await response.json();
+
     alert(data.message);
   };
 
   const handleChange = (name: string, value: string | boolean | number) => {
-    if (name === "isBringingPlusOne" || name === "isAttending") {
-      let boolValue = false;
-      if (value === "yes") boolValue = true;
-      setFormData((prev) => ({ ...prev, [name]: boolValue }));
-    } else {
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    }
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -64,7 +68,6 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           <Container className="space-y-4">
             <Label htmlFor="firstName">First Name</Label>
             <Input
-              required
               type="text"
               id="firstName"
               name="firstName"
@@ -75,7 +78,6 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           <Container className="space-y-4">
             <Label htmlFor="lastName">Last Name</Label>
             <Input
-              required
               type="text"
               id="lastName"
               name="lastName"
@@ -88,22 +90,13 @@ const GuestlistForm = (props: GuestlistFormProps) => {
         <Container className="grid grid-cols-7 gap-4">
           <Container className="space-y-4 col-span-3">
             <Label htmlFor="email">Email</Label>
-            <Input
-              required
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={(e) => handleChange("email", e.target.value)}
-            />
+            <Input type="email" id="email" name="email" value={formData.email} onChange={(e) => handleChange("email", e.target.value)} />
           </Container>
           <Container className="space-y-4 col-span-2">
-            <Label htmlFor="isBringingPlusOne">Is Attending?</Label>
-            <Select
-              defaultValue={formData.isBringingPlusOne ? "yes" : "no"}
-              onValueChange={(val) => handleChange("isBringingPlusOne", val)}>
-              <SelectTrigger id="isBringingPlusOne" name="isBringingPlusOne" className="bg-white text-black w-full mb-0">
-                <SelectValue placeholder="Theme" />
+            <Label htmlFor="isAttending">Is Attending?</Label>
+            <Select defaultValue={formData.isAttending} onValueChange={(val) => handleChange("isAttending", val)}>
+              <SelectTrigger id="isAttending" name="isAttending" className="bg-white text-black w-full mb-0">
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="yes">Yes</SelectItem>
@@ -111,13 +104,12 @@ const GuestlistForm = (props: GuestlistFormProps) => {
               </SelectContent>
             </Select>
           </Container>
+
           <Container className="space-y-4 col-span-2">
             <Label htmlFor="isBringingPlusOne">Is bringing a +1?</Label>
-            <Select
-              defaultValue={formData.isBringingPlusOne ? "yes" : "no"}
-              onValueChange={(val) => handleChange("isBringingPlusOne", val)}>
+            <Select defaultValue={formData.isBringingPlusOne} onValueChange={(val) => handleChange("isBringingPlusOne", val)}>
               <SelectTrigger id="isBringingPlusOne" name="isBringingPlusOne" className="bg-white text-black w-full mb-0">
-                <SelectValue placeholder="Theme" />
+                <SelectValue />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="yes">Yes</SelectItem>
@@ -198,10 +190,13 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           />
         </Container>
         <Container className="grid grid-cols-3 gap-4">
-          <Button variant="destructive" type="button" className="py-6 cursor-pointer font-semibold">
-            Delete Guest
-          </Button>
-          <Button type="submit" className="py-6 bg-slate-800 hover:bg-slate-700 col-span-2 cursor-pointer font-semibold">
+          {props.guest && (
+            <Button variant="destructive" type="button" className="py-6 cursor-pointer font-semibold">
+              Delete Guest
+            </Button>
+          )}
+
+          <Button type="submit" className="py-6 bg-slate-800 hover:bg-slate-700 col-span-2 col-start-2 cursor-pointer font-semibold">
             Submit
           </Button>
         </Container>

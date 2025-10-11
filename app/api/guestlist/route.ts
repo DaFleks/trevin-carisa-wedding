@@ -10,7 +10,8 @@ export async function POST(req: Request) {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        isBringingPlusOne: formData.isBringingPlusOne,
+        isAttending: formData.isAttending === "yes" ? true : false,
+        isBringingPlusOne: formData.isBringingPlusOne === "yes" ? true : false,
         mealOptions: formData.mealOptions,
         streetAddress: formData.streetAddress,
         phoneNumber: formData.phoneNumber,
@@ -20,9 +21,12 @@ export async function POST(req: Request) {
         note: formData.note,
       },
     });
-  } catch (error: unknown) {
-    console.log(error);
-    return NextResponse.json({ message: "There was an error!" });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    let errorMessage = "There was an error!";
+
+    if (error.code === "P2002") errorMessage = "That email already exists in the list!";
+    return NextResponse.json({ message: errorMessage });
   }
   return NextResponse.json({ message: "Guest Created!" });
 }
@@ -37,7 +41,8 @@ export async function PATCH(req: Request) {
         firstName: formData.firstName,
         lastName: formData.lastName,
         email: formData.email,
-        isBringingPlusOne: formData.isBringingPlusOne,
+        isAttending: formData.isAttending === "yes" ? true : false,
+        isBringingPlusOne: formData.isBringingPlusOne === "yes" ? true : false,
         mealOptions: formData.mealOptions,
         streetAddress: formData.streetAddress,
         phoneNumber: formData.phoneNumber,
@@ -47,9 +52,12 @@ export async function PATCH(req: Request) {
         note: formData.note,
       },
     });
-  } catch (error: unknown) {
-    console.log(error);
-    return NextResponse.json({ message: "There was an error!" });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (error: any) {
+    let errorMessage = "There was an error!";
+
+    if (error.code === "P2002") errorMessage = "That email already exists in the list!";
+    return NextResponse.json({ message: errorMessage });
   }
 
   return NextResponse.json({ message: "Guest Updated!" });
