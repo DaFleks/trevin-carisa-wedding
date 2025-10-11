@@ -10,8 +10,6 @@ import { Button } from "./ui/button";
 import { Guest } from "@/app/generated/prisma";
 import { useState } from "react";
 import { ChevronLeftCircleIcon } from "lucide-react";
-import Modal from "./Modal";
-import ConfirmDeleteModal from "./ConfirmDeleteModal";
 import { useToggle } from "@/hooks/useToggle";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./DeleteModal";

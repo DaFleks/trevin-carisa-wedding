@@ -1,7 +1,7 @@
 "use client";
 
 import { Guest } from "@/app/generated/prisma";
-import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Text from "./aetherium/Text";
 import { Button } from "./ui/button";
 import Link from "next/link";
