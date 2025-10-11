@@ -19,6 +19,7 @@ model Guest {
   firstName         String
   lastName          String
   email             String   @unique
+  isAttending       Boolean  @default(false)
   isBringingPlusOne Boolean  @default(false)
   mealOptions       String?
   streetAddress     String?

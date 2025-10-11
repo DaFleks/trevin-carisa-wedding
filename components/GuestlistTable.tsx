@@ -26,9 +26,10 @@ const GuestlistTable = (props: GuestlistTableProps) => {
   return (
     <Container className="overflow-y-scroll h-[90%] border">
       <Table>
-        <TableHeader className="sticky top-0 bg-neutral-600 !text-white ">
+        <TableHeader className="sticky top-0 bg-neutral-600 !text-white">
           <TableRow>
             <TableHead className="font-bold">Guest</TableHead>
+            <TableHead className="font-bold text-center">Attending</TableHead>
             <TableHead className="font-bold text-center">Plus One</TableHead>
             <TableHead className="font-bold text-center">Meal Options</TableHead>
             <TableHead className="font-bold">Note</TableHead>
@@ -51,6 +52,7 @@ const GuestlistTable = (props: GuestlistTableProps) => {
                   <Link href={`mailto: ${guest.email}`}>{guest.email}</Link>
                 </Text>
               </TableCell>
+              <TableCell className="text-center">{guest.isAttending ? "Yes" : "No"}</TableCell>
               <TableCell className="text-center">{guest.isBringingPlusOne ? "Yes" : "No"}</TableCell>
               <TableCell className="text-center">{guest.mealOptions?.replaceAll(",", ", ")}</TableCell>
               <TableCell>{guest.note}</TableCell>

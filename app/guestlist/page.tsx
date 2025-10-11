@@ -15,7 +15,7 @@ const page = async () => {
       <Container className="w-2/3 h-full border bg-white shadow-2xl shadow-neutral-400 mx-auto flex flex-col justify-center p-8">
         <h1 className="text-4xl font-bold">{`Carisa & Trevin's Guestlist`}</h1>
         <Button className="w-1/4 ml-auto font-semibold my-8 py-6 bg-neutral-600" asChild>
-          <Link href="#">
+          <Link href="/guestlist/add">
             <UserPlusIcon />
             Add a Guest
           </Link>

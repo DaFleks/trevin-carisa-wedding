@@ -12,21 +12,37 @@ import { useState } from "react";
 import { ChevronLeftCircleIcon } from "lucide-react";
 
 interface GuestlistFormProps {
-  guest: Guest;
+  guest?: Guest | null;
 }
 
+const guestListDefaultValues = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  isAttending: "",
+  isBringingPlusOne: "",
+  mealOptions: "",
+  streetAddress: "",
+  phoneNumber: "",
+  city: "",
+  province: "",
+  postalCode: "",
+  note: "",
+};
+
 const GuestlistForm = (props: GuestlistFormProps) => {
-  const [formData, setFormData] = useState<Guest>(props.guest);
+  const [formData, setFormData] = useState(props.guest ? props.guest : guestListDefaultValues);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const response = await fetch("/api/guestlist/", { method: "PATCH", body: JSON.stringify(formData) });
+    const method = props.guest ? "PATCH" : "POST";
+    const response = await fetch("/api/guestlist/", { method: method, body: JSON.stringify(formData) });
     const data = await response.json();
     alert(data.message);
   };
 
   const handleChange = (name: string, value: string | boolean | number) => {
-    if (name === "isBringingPlusOne") {
+    if (name === "isBringingPlusOne" || name === "isAttending") {
       let boolValue = false;
       if (value === "yes") boolValue = true;
       setFormData((prev) => ({ ...prev, [name]: boolValue }));
@@ -48,6 +64,7 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           <Container className="space-y-4">
             <Label htmlFor="firstName">First Name</Label>
             <Input
+              required
               type="text"
               id="firstName"
               name="firstName"
@@ -58,6 +75,7 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           <Container className="space-y-4">
             <Label htmlFor="lastName">Last Name</Label>
             <Input
+              required
               type="text"
               id="lastName"
               name="lastName"
@@ -70,7 +88,14 @@ const GuestlistForm = (props: GuestlistFormProps) => {
         <Container className="grid grid-cols-5 gap-4">
           <Container className="space-y-4 col-span-3">
             <Label htmlFor="email">Email</Label>
-            <Input type="email" id="email" name="email" value={formData.email} onChange={(e) => handleChange("email", e.target.value)} />
+            <Input
+              required
+              type="email"
+              id="email"
+              name="email"
+              value={formData.email}
+              onChange={(e) => handleChange("email", e.target.value)}
+            />
           </Container>
           <Container className="space-y-4 col-span-2">
             <Label htmlFor="isBringingPlusOne">Is guest bringing a +1?</Label>
@@ -100,13 +125,13 @@ const GuestlistForm = (props: GuestlistFormProps) => {
         </Container>
         <Container className="grid grid-cols-5 gap-4">
           <Container className="space-y-4 col-span-3">
-            <Label htmlFor="street">Street</Label>
+            <Label htmlFor="street">Street Address</Label>
             <Input
               type="text"
-              id="street"
-              name="street"
+              id="streetAddress"
+              name="streetAddress"
               value={formData.streetAddress || ""}
-              onChange={(e) => handleChange("street", e.target.value)}
+              onChange={(e) => handleChange("streetAddress", e.target.value)}
             />
           </Container>
           <Container className="space-y-4 col-span-2">
@@ -151,7 +176,6 @@ const GuestlistForm = (props: GuestlistFormProps) => {
         <Container className="space-y-4">
           <Label htmlFor="note">Note</Label>
           <Textarea
-          
             id="note"
             name="note"
             className="bg-white text-black resize-none"

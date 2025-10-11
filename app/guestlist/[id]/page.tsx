@@ -17,7 +17,7 @@ const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   return (
     <Container className="fixed top-0 left-0 h-full w-full bg-neutral-200 text-black [text-shadow:_0px_0px_0px_rgba(0,0,0,0.5)]">
       <Container className="w-2/3 h-full bg-white border shadow-2xl shadow-neutral-400 mx-auto flex flex-col justify-center p-8">
-        <h1 className="text-4xl font-bold">{`Editing Form`}</h1>
+        <h1 className="text-4xl font-bold">{`Editing Guest`}</h1>
         <Container className="h-full">
           <GuestlistForm guest={guest} />
         </Container>
