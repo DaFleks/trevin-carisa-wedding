@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import prisma from "@/lib/prisma";
 import { UserPlusIcon } from "lucide-react";
 import Link from "next/link";
+export const revalidate = 0; // 👈 always fetch live DB data
 
 const page = async () => {
   const guests = await prisma.guest.findMany({ orderBy: { firstName: "asc" } });
