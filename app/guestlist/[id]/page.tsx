@@ -1,4 +1,3 @@
-import { Guest } from "@/lib/generated/prisma";
 import Container from "@/components/aetherium/Container";
 import GuestlistForm from "@/components/GuestlistForm";
 import { Button } from "@/components/ui/button";
