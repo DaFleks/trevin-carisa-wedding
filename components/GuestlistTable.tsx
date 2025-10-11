@@ -1,6 +1,5 @@
 "use client";
 
-import { Guest } from "@/lib/generated/prisma";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Text from "./aetherium/Text";
 import { Button } from "./ui/button";
@@ -11,6 +10,7 @@ import Container from "./aetherium/Container";
 import DeleteModal from "./DeleteModal";
 import { useToggle } from "@/hooks/useToggle";
 import { useState } from "react";
+import { Guest } from "@prisma/client";
 
 interface GuestlistTableProps {
   guests: Guest[];
