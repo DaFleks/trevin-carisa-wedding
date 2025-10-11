@@ -7,7 +7,7 @@ import { Input } from "./ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
-import { Guest } from "@/app/generated/prisma";
+import { Guest } from "@/lib/generated/prisma";
 import { useState } from "react";
 import { ChevronLeftCircleIcon } from "lucide-react";
 import { useToggle } from "@/hooks/useToggle";
