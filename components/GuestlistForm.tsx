@@ -85,7 +85,7 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           </Container>
         </Container>
 
-        <Container className="grid grid-cols-5 gap-4">
+        <Container className="grid grid-cols-7 gap-4">
           <Container className="space-y-4 col-span-3">
             <Label htmlFor="email">Email</Label>
             <Input
@@ -98,7 +98,21 @@ const GuestlistForm = (props: GuestlistFormProps) => {
             />
           </Container>
           <Container className="space-y-4 col-span-2">
-            <Label htmlFor="isBringingPlusOne">Is guest bringing a +1?</Label>
+            <Label htmlFor="isBringingPlusOne">Is Attending?</Label>
+            <Select
+              defaultValue={formData.isBringingPlusOne ? "yes" : "no"}
+              onValueChange={(val) => handleChange("isBringingPlusOne", val)}>
+              <SelectTrigger id="isBringingPlusOne" name="isBringingPlusOne" className="bg-white text-black w-full mb-0">
+                <SelectValue placeholder="Theme" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="yes">Yes</SelectItem>
+                <SelectItem value="no">No</SelectItem>
+              </SelectContent>
+            </Select>
+          </Container>
+          <Container className="space-y-4 col-span-2">
+            <Label htmlFor="isBringingPlusOne">Is bringing a +1?</Label>
             <Select
               defaultValue={formData.isBringingPlusOne ? "yes" : "no"}
               onValueChange={(val) => handleChange("isBringingPlusOne", val)}>
