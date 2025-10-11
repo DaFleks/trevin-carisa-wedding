@@ -10,6 +10,11 @@ import { Button } from "./ui/button";
 import { Guest } from "@/app/generated/prisma";
 import { useState } from "react";
 import { ChevronLeftCircleIcon } from "lucide-react";
+import Modal from "./Modal";
+import ConfirmDeleteModal from "./ConfirmDeleteModal";
+import { useToggle } from "@/hooks/useToggle";
+import { useRouter } from "next/navigation";
+import DeleteModal from "./DeleteModal";
 
 interface GuestlistFormProps {
   guest?: Guest | null;
@@ -31,6 +36,10 @@ const guestListDefaultValues = {
 };
 
 const GuestlistForm = (props: GuestlistFormProps) => {
+  const router = useRouter();
+
+  const [isDeleteModalOpen, handleIsDeleteModalOpen] = useToggle(false);
+
   const [formData, setFormData] = useState(
     props.guest
       ? {
@@ -53,6 +62,13 @@ const GuestlistForm = (props: GuestlistFormProps) => {
 
   const handleChange = (name: string, value: string | boolean | number) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleDeleteGuest = async () => {
+    const response = await fetch("/api/guestlist", { method: "DELETE", body: JSON.stringify({ id: props.guest ? props.guest.id : "" }) });
+    const data = await response.json();
+    alert(data.message);
+    router.push("/guestlist");
   };
 
   return (
@@ -191,7 +207,10 @@ const GuestlistForm = (props: GuestlistFormProps) => {
         </Container>
         <Container className="grid grid-cols-3 gap-4">
           {props.guest && (
-            <Button variant="destructive" type="button" className="py-6 cursor-pointer font-semibold">
+            <Button
+              type="button"
+              className="py-6 bg-red-900 hover:bg-red-900/90 cursor-pointer font-semibold"
+              onClick={handleIsDeleteModalOpen}>
               Delete Guest
             </Button>
           )}
@@ -201,6 +220,8 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           </Button>
         </Container>
       </form>
+
+      <DeleteModal open={isDeleteModalOpen} handleDeleteGuest={handleDeleteGuest} handleIsOpen={handleIsDeleteModalOpen} />
     </Container>
   );
 };
