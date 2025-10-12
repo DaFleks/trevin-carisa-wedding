@@ -27,7 +27,7 @@ const GuestlistLogin = () => {
     });
     handleIsLoading();
     if (res?.error) {
-      setError("Wrong password mf."); // 👈 custom error message
+      setError(res.error); // 👈 custom error message
     } else {
       router.push(res?.url ?? "/guestlist"); // redirect manually
     }
