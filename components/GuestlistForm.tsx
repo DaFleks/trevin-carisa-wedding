@@ -47,11 +47,11 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           isAttending: props.guest.isAttending ? "yes" : "no",
           isBringingPlusOne: props.guest.isBringingPlusOne ? "yes" : "no",
           mealOptions:
-            JSON.parse(props.guest.mealOptions).Appetizer +
+            JSON.parse(props.guest.mealOptions || "").Appetizer +
             "," +
-            JSON.parse(props.guest.mealOptions).Entree +
+            JSON.parse(props.guest.mealOptions || "").Entree +
             "," +
-            JSON.parse(props.guest.mealOptions).Dessert,
+            JSON.parse(props.guest.mealOptions || "").Dessert,
         }
       : guestListDefaultValues
   );
