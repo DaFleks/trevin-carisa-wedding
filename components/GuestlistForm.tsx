@@ -29,6 +29,7 @@ const guestListDefaultValues = {
   phoneNumber: "",
   city: "",
   province: "",
+  country: "",
   postalCode: "",
   note: "",
 };
@@ -38,12 +39,19 @@ const GuestlistForm = (props: GuestlistFormProps) => {
 
   const [isDeleteModalOpen, handleIsDeleteModalOpen] = useToggle(false);
 
+  //  TODO: restructure mealOptions when provided menu
   const [formData, setFormData] = useState(
     props.guest
       ? {
           ...props.guest,
           isAttending: props.guest.isAttending ? "yes" : "no",
           isBringingPlusOne: props.guest.isBringingPlusOne ? "yes" : "no",
+          mealOptions:
+            JSON.parse(props.guest.mealOptions).Appetizer +
+            "," +
+            JSON.parse(props.guest.mealOptions).Entree +
+            "," +
+            JSON.parse(props.guest.mealOptions).Dessert,
         }
       : guestListDefaultValues
   );
@@ -73,7 +81,6 @@ const GuestlistForm = (props: GuestlistFormProps) => {
     <Container className=" bg-white mx-auto w-2/3 p-8 border rounded-lg shadow-lg h-full flex flex-col justify-center gap-8">
       <form className="space-y-8" onSubmit={handleSubmit}>
         <h1 className="text-4xl font-bold mb-8">{`Editing Guest`}</h1>
-
         <Container className="grid grid-cols-2 gap-4">
           <Container className="space-y-4">
             <Label htmlFor="firstName">First Name</Label>
@@ -162,7 +169,7 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           </Container>
         </Container>
 
-        <Container className="grid grid-cols-4 gap-4">
+        <Container className="grid grid-cols-5 gap-4">
           <Container className="space-y-4 col-span-2">
             <Label htmlFor="city">City</Label>
             <Input type="text" id="city" name="city" value={formData.city || ""} onChange={(e) => handleChange("city", e.target.value)} />
@@ -175,6 +182,16 @@ const GuestlistForm = (props: GuestlistFormProps) => {
               name="province"
               value={formData.province || ""}
               onChange={(e) => handleChange("province", e.target.value)}
+            />
+          </Container>
+          <Container className="space-y-4">
+            <Label htmlFor="country">Country</Label>
+            <Input
+              type="text"
+              id="country"
+              name="country"
+              value={formData.country || ""}
+              onChange={(e) => handleChange("country", e.target.value)}
             />
           </Container>
           <Container className="space-y-4">

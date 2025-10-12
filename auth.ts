@@ -1,0 +1,30 @@
+import NextAuth from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
+import prisma from "./lib/prisma";
+
+export const { handlers, signIn, signOut, auth } = NextAuth({
+  providers: [
+    Credentials({
+      name: "password",
+      credentials: {
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        const password = credentials?.password;
+        const store = await prisma.auth.findFirst();
+
+        if (await bcrypt.compare(password as string, store?.hashedPassword as string)) {
+          return { id: "single-user", name: "Guest" }; // a dummy user object
+        }
+        return null; // fail login
+      },
+    }),
+  ],
+  pages: {
+    signIn: "/guestlist/login", // optional, your custom page
+  },
+  session: { strategy: "jwt" },
+  // 🔐 Add this line:
+  secret: process.env.AUTH_SECRET,
+});

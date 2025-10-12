@@ -30,6 +30,7 @@ model Guest {
   city              String?
   province          String?
   postalCode        String?
+  country           String?
   phoneNumber       String?
   note              String?
   createdAt         DateTime @default(now())

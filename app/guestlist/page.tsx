@@ -1,4 +1,6 @@
+import Container from "@/components/aetherium/Container";
 import GuestlistTable from "@/components/GuestlistTable";
+import SignOutButton from "@/components/SignOutButton";
 import { Button } from "@/components/ui/button";
 
 import prisma from "@/lib/prisma";
@@ -9,11 +11,15 @@ export const revalidate = 0; // 👈 always fetch live DB data
 
 const page = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) => {
   const { orderBy, sortBy, filterBy } = await searchParams;
-  const guests = await prisma.guest.findMany({ orderBy: { [orderBy as string]: sortBy } });
+  const guests = await prisma.guest.findMany({ orderBy: { updatedAt: "desc" } });
 
   return (
     <>
-      <h1 className="text-4xl font-bold">{`Carisa & Trevin's Guestlist`}</h1>
+      <Container className="flex justify-between">
+        <h1 className="text-4xl font-bold">{`Carisa & Trevin's Guestlist`}</h1>
+        <SignOutButton />
+      </Container>
+
       <Button className="w-1/6 ml-auto font-semibold my-8 bg-black" asChild>
         <Link href="/guestlist/add">
           <UserPlusIcon />

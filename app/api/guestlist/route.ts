@@ -4,6 +4,7 @@ import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
     const formData = await req.json();
+    const meals = formData.mealOptions.split(",");
 
     await prisma.guest.create({
       data: {
@@ -12,12 +13,13 @@ export async function POST(req: Request) {
         email: formData.email,
         isAttending: formData.isAttending === "yes" ? true : false,
         isBringingPlusOne: formData.isBringingPlusOne === "yes" ? true : false,
-        mealOptions: formData.mealOptions,
+        mealOptions: JSON.stringify({ Appetizer: meals[0], Entree: meals[1], Dessert: meals[2] }),
         streetAddress: formData.streetAddress,
         phoneNumber: formData.phoneNumber,
         city: formData.city,
         province: formData.province,
         postalCode: formData.postalCode,
+        country: formData.country,
         note: formData.note,
       },
     });
@@ -34,6 +36,8 @@ export async function POST(req: Request) {
 export async function PATCH(req: Request) {
   try {
     const formData = await req.json();
+    const meals = formData.mealOptions.split(",");
+    console.log(JSON.stringify({ Appetizer: meals[0], Entrees: meals[1], Desserts: meals[2] }));
 
     await prisma.guest.update({
       where: { id: formData.id },
@@ -43,12 +47,13 @@ export async function PATCH(req: Request) {
         email: formData.email,
         isAttending: formData.isAttending === "yes" ? true : false,
         isBringingPlusOne: formData.isBringingPlusOne === "yes" ? true : false,
-        mealOptions: formData.mealOptions,
+        mealOptions: JSON.stringify({ Appetizer: meals[0], Entree: meals[1], Dessert: meals[2] }),
         streetAddress: formData.streetAddress,
         phoneNumber: formData.phoneNumber,
         city: formData.city,
         province: formData.province,
         postalCode: formData.postalCode,
+        country: formData.country,
         note: formData.note,
       },
     });

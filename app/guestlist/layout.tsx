@@ -1,4 +1,5 @@
 import Container from "@/components/aetherium/Container";
+import SignOutButton from "@/components/SignOutButton";
 import { Geist } from "next/font/google";
 
 const geist = Geist({
