@@ -24,7 +24,6 @@ const GuestlistLogin = () => {
     const res = await signIn("credentials", {
       password,
       redirect: false, // 👈 important
-      callbackUrl: "/guestlist",
     });
     handleIsLoading();
     if (res?.error) {
