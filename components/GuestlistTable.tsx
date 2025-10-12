@@ -1,6 +1,6 @@
 "use client";
 
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import Text from "./aetherium/Text";
 import { Button } from "./ui/button";
 import Link from "next/link";
@@ -36,20 +36,23 @@ const GuestlistTable = (props: GuestlistTableProps) => {
 
   return (
     <>
-      <Container className="overflow-y-scroll h-[90%] border">
+      <Container className="overflow-y-auto h-[90%] bg-white border rounded-lg p-4">
         <Table>
-          <TableHeader className="sticky top-0 bg-neutral-600 !text-white">
+          <TableCaption className="sticky -bottom-4 bg-white text-black py-3 font-bold text-xs">
+            Total Guests: {props.guests.length}
+          </TableCaption>
+          <TableHeader className="sticky !-top-4 bg-white !text-black text-xs border-b">
             <TableRow>
-              <TableHead className="font-bold">Guest</TableHead>
-              <TableHead className="font-bold text-center">Attending</TableHead>
-              <TableHead className="font-bold text-center">Plus One</TableHead>
-              <TableHead className="font-bold text-center">Meal Options</TableHead>
-              <TableHead className="font-bold">Note</TableHead>
+              <TableHead className="">Guest</TableHead>
+              <TableHead className="text-center">Attending</TableHead>
+              <TableHead className="text-center">+1</TableHead>
+              <TableHead className="text-center">Meal Options</TableHead>
+              <TableHead className="text-center">Note</TableHead>
               <TableHead />
               <TableHead />
             </TableRow>
           </TableHeader>
-          <TableBody>
+          <TableBody className="text-xs">
             {props.guests.map((guest) => (
               <TableRow key={guest.id}>
                 <TableCell className="py-4">
@@ -67,9 +70,9 @@ const GuestlistTable = (props: GuestlistTableProps) => {
                 <TableCell className="text-center">{guest.isAttending ? "Yes" : "No"}</TableCell>
                 <TableCell className="text-center">{guest.isBringingPlusOne ? "Yes" : "No"}</TableCell>
                 <TableCell className="text-center">{guest.mealOptions?.replaceAll(",", ", ")}</TableCell>
-                <TableCell>{guest.note}</TableCell>
+                <TableCell className="text-center">{guest.note}</TableCell>
                 <TableCell>
-                  <Button asChild className="bg-neutral-600 h-10 w-10">
+                  <Button asChild variant="ghost">
                     <Link href={`/guestlist/${guest.id}`}>
                       <PencilIcon />
                     </Link>
@@ -77,8 +80,7 @@ const GuestlistTable = (props: GuestlistTableProps) => {
                 </TableCell>
                 <TableCell>
                   <Button
-                    variant="destructive"
-                    className="h-10 w-10 cursor-pointer"
+                    variant="ghost"
                     onClick={() => {
                       handleDeleteModalWindow(guest.id);
                     }}>

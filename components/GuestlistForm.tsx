@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from ".
 import { Textarea } from "./ui/textarea";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { ChevronLeftCircleIcon } from "lucide-react";
+import { ChevronLeftCircleIcon, SendHorizonalIcon, TrashIcon } from "lucide-react";
 import { useToggle } from "@/hooks/useToggle";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./DeleteModal";
@@ -70,14 +70,10 @@ const GuestlistForm = (props: GuestlistFormProps) => {
   };
 
   return (
-    <Container className="mx-auto w-1/2 h-full flex flex-col justify-center gap-8">
-      <Button asChild className="bg-neutral-600 w-1/3 font-semibold ml-auto py-6">
-        <Link href="/guestlist">
-          <ChevronLeftCircleIcon />
-          Go Back
-        </Link>
-      </Button>
+    <Container className=" bg-white mx-auto w-2/3 p-8 border rounded-lg shadow-lg h-full flex flex-col justify-center gap-8">
       <form className="space-y-8" onSubmit={handleSubmit}>
+        <h1 className="text-4xl font-bold mb-8">{`Editing Guest`}</h1>
+
         <Container className="grid grid-cols-2 gap-4">
           <Container className="space-y-4">
             <Label htmlFor="firstName">First Name</Label>
@@ -120,7 +116,7 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           </Container>
 
           <Container className="space-y-4 col-span-2">
-            <Label htmlFor="isBringingPlusOne">Is bringing a +1?</Label>
+            <Label htmlFor="isBringingPlusOne">Is Bringing a +1?</Label>
             <Select defaultValue={formData.isBringingPlusOne} onValueChange={(val) => handleChange("isBringingPlusOne", val)}>
               <SelectTrigger id="isBringingPlusOne" name="isBringingPlusOne" className="bg-white text-black w-full mb-0">
                 <SelectValue />
@@ -204,16 +200,24 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           />
         </Container>
         <Container className="grid grid-cols-3 gap-4">
+          <Button asChild className="bg-neutral-600 font-semibold py-6">
+            <Link href="/guestlist">
+              <ChevronLeftCircleIcon />
+              Go Back
+            </Link>
+          </Button>
           {props.guest && (
             <Button
               type="button"
               className="py-6 bg-red-900 hover:bg-red-900/90 cursor-pointer font-semibold"
               onClick={handleIsDeleteModalOpen}>
-              Delete Guest
+              <TrashIcon />
+              Delete
             </Button>
           )}
 
-          <Button type="submit" className="py-6 bg-slate-800 hover:bg-slate-700 col-span-2 col-start-2 cursor-pointer font-semibold">
+          <Button type="submit" className="py-6 bg-slate-800 hover:bg-slate-700 col-start-3 cursor-pointer font-semibold">
+            <SendHorizonalIcon />
             Submit
           </Button>
         </Container>

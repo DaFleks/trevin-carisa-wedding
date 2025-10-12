@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Tangerine } from "next/font/google";
+import { Montserrat, Tangerine } from "next/font/google";
 
 import Container from "@/components/aetherium/Container";
 import Text from "@/components/aetherium/Text";
@@ -20,9 +20,14 @@ import Location from "@/components/Location";
 
 const tangerine = Tangerine({ weight: ["400", "700"], subsets: ["latin"] });
 
+const montserrat = Montserrat({
+  subsets: ["latin"],
+});
+
 export default function Home() {
   return (
-    <>
+    <Container
+      className={`${montserrat.className} overflow-y-scroll h-full border-4 border-white  xl:w-1/3 xl:mx-auto xl:border-0 xl:shadow-lg xl:shadow-black text-white [text-shadow:_2px_2px_8px_rgba(0,0,0,0.5)]`}>
       {/* INTRO AND HERO SECTION */}
       <HeroSection />
 
@@ -114,6 +119,6 @@ export default function Home() {
           &#160;of 101Creatives
         </Text>
       </Container>
-    </>
+    </Container>
   );
 }

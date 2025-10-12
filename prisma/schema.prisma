@@ -13,6 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Auth {
+  id             String @id @default(uuid())
+  hashedPassword String
+}
+
 model Guest {
   id                String   @id @default(uuid())
   firstName         String
