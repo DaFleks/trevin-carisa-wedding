@@ -7,7 +7,6 @@ import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useState } from "react";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Loading from "./aetherium/Loading/Loading";
 import { useToggle } from "@/hooks/useToggle";
@@ -20,17 +19,17 @@ const GuestlistLogin = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    handleIsLoading();
-    const res = await signIn("credentials", {
-      password,
-      redirect: false, // 👈 important
-    });
-    handleIsLoading();
-    if (res?.error) {
-      setError(res.error); // 👈 custom error message
-    } else {
-      router.push(res?.url ?? "/guestlist"); // redirect manually
-    }
+    // handleIsLoading();
+    // const res = await signIn("credentials", {
+    //   password,
+    //   redirect: false, // 👈 important
+    // });
+    // handleIsLoading();
+    // if (res?.error) {
+    //   setError(res.error); // 👈 custom error message
+    // } else {
+    //   router.push(res?.url ?? "/guestlist"); // redirect manually
+    // }
   }
 
   return (
