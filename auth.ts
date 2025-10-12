@@ -13,12 +13,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         const password = credentials?.password;
         const store = await prisma.auth.findFirst();
-        console.log('hi!');
+        console.log("hi!");
         console.log(password);
         console.log(store);
 
+        console.log(await bcrypt.compare(password as string, store?.hashedPassword as string));
         if (await bcrypt.compare(password as string, store?.hashedPassword as string)) {
-          console.log('login guuci');
+          console.log("login guuci");
           return { id: "single-user", name: "Guest" }; // a dummy user object
         }
         return null; // fail login
