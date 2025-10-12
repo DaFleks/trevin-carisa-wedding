@@ -20,7 +20,7 @@ export async function middleware(req: NextRequest) {
 
   // 🔒 Require auth for everything else
   if (!token) {
-    const loginUrl = new URL("/guestlist/login", req.url);
+    const loginUrl = new URL(`/guestlist/login?${token}`, req.url);
     return NextResponse.redirect(loginUrl);
   }
 
