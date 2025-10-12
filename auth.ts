@@ -1,9 +1,17 @@
-import NextAuth from "next-auth";
+import NextAuth, { type NextAuthConfig, type Session, type User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import prisma from "./lib/prisma";
+import prisma from "@/lib/prisma";
 
-export const { handlers, signIn, signOut, auth } = NextAuth({
+/** 1️⃣  Define a proper User shape */
+interface SimpleUser extends User {
+  id: string;
+  name: string;
+  role?: string;
+}
+
+/** 2️⃣  Create your Auth.js config */
+export const authConfig: NextAuthConfig = {
   providers: [
     Credentials({
       name: "password",
@@ -13,25 +21,47 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       async authorize(credentials) {
         const password = credentials?.password;
         const store = await prisma.auth.findFirst();
-        console.log("hi!");
-        console.log(password);
-        console.log(store);
+        if (!store) return null;
 
-        console.log(await bcrypt.compare(password as string, store?.hashedPassword as string));
-        if (await bcrypt.compare(password as string, store?.hashedPassword as string)) {
-          console.log("login guuci");
-          return { id: "single-user", name: "Guest" }; // a dummy user object
-        }
-        return null; // fail login
+        const match = await bcrypt.compare(password as string, store.hashedPassword);
+        if (!match) return null;
+
+        // Must return a plain serializable object
+        const user: SimpleUser = { id: "single-user", name: "Guest", role: "user" };
+        return user;
       },
     }),
   ],
-  pages: {
-    signIn: "/guestlist/login", // optional, your custom page
-  },
+  pages: { signIn: "/guestlist/login" },
   session: { strategy: "jwt" },
-  // 🔐 Add this line:
   secret: process.env.AUTH_SECRET,
+
+  /** 3️⃣  Typed callbacks */
+  callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        const u = user as SimpleUser;
+        token.id = u.id;
+        token.name = u.name;
+        token.role = u.role;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Explicitly type-cast to NextAuth Session
+      const s = session as Session & {
+        user: { id?: string; name?: string; role?: string };
+      };
+
+      s.user = {
+        id: token.id as string,
+        name: token.name as string,
+        role: token.role as string,
+      };
+
+      return s;
+    },
+  },
   cookies: {
     sessionToken: {
       name: process.env.NODE_ENV === "production" ? "__Secure-authjs.session-token" : "authjs.session-token",
@@ -43,4 +73,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     },
   },
-});
+};
+
+/** 4️⃣  Export typed helpers */
+export const { handlers, signIn, signOut, auth } = NextAuth(authConfig);
