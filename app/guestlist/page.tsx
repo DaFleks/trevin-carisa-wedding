@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import Container from "@/components/aetherium/Container";
 import GuestlistTable from "@/components/GuestlistTable";
 import SignOutButton from "@/components/SignOutButton";
@@ -10,6 +11,9 @@ import Link from "next/link";
 export const revalidate = 0; // 👈 always fetch live DB data
 
 const page = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) => {
+  const session = await auth();
+
+  if (!session?.user) return null;
   const { orderBy, sortBy, filterBy } = await searchParams;
   const guests = await prisma.guest.findMany({ orderBy: { updatedAt: "desc" } });
 

@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Loading from "./aetherium/Loading/Loading";
 import { useToggle } from "@/hooks/useToggle";
+import { signIn } from "next-auth/react";
 
 const GuestlistLogin = () => {
   const [password, setPassword] = useState("");
@@ -19,17 +20,13 @@ const GuestlistLogin = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // handleIsLoading();
-    // const res = await signIn("credentials", {
-    //   password,
-    //   redirect: false, // 👈 important
-    // });
-    // handleIsLoading();
-    // if (res?.error) {
-    //   setError(res.error); // 👈 custom error message
-    // } else {
-    //   router.push(res?.url ?? "/guestlist"); // redirect manually
-    // }
+    let response;
+    try {
+      response = signIn("credentials", { password: password });
+    } catch (error) {
+      console.log("test");
+      console.log(error);
+    }
   }
 
   return (
