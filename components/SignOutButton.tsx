@@ -19,8 +19,8 @@ const SignOutButton = () => {
           const response = await fetch("/api/auth", { method: "DELETE" });
           const data = await response.json();
           handleIsLoading();
-          if (data.status === 201) router.refresh();
-          if (data.status !== 201) alert("There was an error logging out.");
+          if (data.status === 204) router.refresh();
+          if (data.status !== 204) alert("There was an error logging out.");
         }}>
         <LogOutIcon />
         Sign Out

@@ -14,7 +14,7 @@ interface LocationProps {
 const Location = (props: LocationProps) => {
   return (
     <Container className={props.className}>
-      <h1 className={`text-5xl mb-4 tangerine_26246154-module__d4xTbq__className`}>{props.name}</h1>
+      <h1 className={`text-5xl mb-4 tangerine_481dc2cb-module__kYIvmq__className`}>{props.name}</h1>
       <Text className="text-sm">{props.street}</Text>
       <Text className="text-sm">{props.city}</Text>
       <Text className="text-sm">{props.phone}</Text>

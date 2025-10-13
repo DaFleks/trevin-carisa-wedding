@@ -1,20 +1,35 @@
-import { NextRequest, NextResponse } from "next/server";
-import prisma from "./lib/prisma";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-export const runtime = "nodejs";
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
-export async function middleware(req: NextRequest) {
-  const id = req.cookies.get("session_id")?.value;
+  // ✅ Whitelist the verification API route
+  if (pathname.startsWith("/api/guestlist/verify")) {
+    return NextResponse.next();
+  }
 
-  if (!id) return NextResponse.redirect(new URL("/guestlist/login", req.url));
+  // ✅ Allow the login page
+  if (pathname === "/guestlist/login") {
+    return NextResponse.next();
+  }
 
-  const session = await prisma.session.findUnique({ where: { id: id } });
+  // 🔒 Protect all other /guestlist routes
+  if (pathname.startsWith("/guestlist")) {
+    const sessionId = req.cookies.get("session_id")?.value;
 
-  if (!session) return NextResponse.redirect(new URL("/guestlist/login", req.url));
+    if (!sessionId) {
+      console.log("redirect");
+      return NextResponse.redirect(new URL("/guestlist/login", req.url));
+    }
+  }
 
   return NextResponse.next();
 }
 
+// ✅ Middleware only applies to guestlist pages and assets (skips verify API)
 export const config = {
-  matcher: ["/guestlist((?!/login).*)"],
+  matcher: [
+    "/guestlist/:path*", // protect /guestlist/*
+  ],
 };

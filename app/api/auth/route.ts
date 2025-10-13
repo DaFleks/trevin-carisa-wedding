@@ -37,5 +37,5 @@ export async function DELETE(req: Request) {
     return NextResponse.json({ message: "There was an error." });
   }
 
-  return NextResponse.json({ message: "Logged Out.", status: 201 });
+  return NextResponse.json({ message: "Logged Out.", status: 204 });
 }

@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     if (error.code === "P2002") errorMessage = "That email already exists in the list!";
     return NextResponse.json({ message: errorMessage });
   }
-  return NextResponse.json({ message: "Guest Created!" });
+  return NextResponse.json({ message: "Guest Created!", status: 201 });
 }
 
 export async function PATCH(req: Request) {
@@ -65,7 +65,7 @@ export async function PATCH(req: Request) {
     return NextResponse.json({ message: errorMessage });
   }
 
-  return NextResponse.json({ message: "Guest Updated!" });
+  return NextResponse.json({ message: "Guest Updated!", status: 204 });
 }
 
 export async function DELETE(req: Request) {
@@ -79,3 +79,5 @@ export async function DELETE(req: Request) {
   }
   return NextResponse.json({ message: "Guest deleted!" });
 }
+
+
