@@ -13,6 +13,7 @@ import { useToggle } from "@/hooks/useToggle";
 import { useRouter } from "next/navigation";
 import DeleteModal from "./DeleteModal";
 import { Guest } from "@prisma/client";
+import Loading from "./aetherium/Loading/Loading";
 
 interface GuestlistFormProps {
   guest?: Guest | null;
@@ -38,6 +39,7 @@ const GuestlistForm = (props: GuestlistFormProps) => {
   const router = useRouter();
 
   const [isDeleteModalOpen, handleIsDeleteModalOpen] = useToggle(false);
+  const [isLoading, handleIsLoading] = useToggle(false);
 
   //  TODO: restructure mealOptions when provided menu
   const [formData, setFormData] = useState(
@@ -59,10 +61,11 @@ const GuestlistForm = (props: GuestlistFormProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    handleIsLoading();
     const method = props.guest ? "PATCH" : "POST";
     const response = await fetch("/api/guestlist/", { method: method, body: JSON.stringify(formData) });
     const data = await response.json();
-
+    handleIsLoading();
     alert(data.message);
   };
 
@@ -71,8 +74,10 @@ const GuestlistForm = (props: GuestlistFormProps) => {
   };
 
   const handleDeleteGuest = async () => {
+    handleIsLoading();
     const response = await fetch("/api/guestlist", { method: "DELETE", body: JSON.stringify({ id: props.guest ? props.guest.id : "" }) });
     const data = await response.json();
+    handleIsLoading();
     alert(data.message);
     router.push("/guestlist");
   };
@@ -217,7 +222,7 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           />
         </Container>
         <Container className="grid grid-cols-3 gap-4">
-          <Button asChild className="bg-neutral-600 font-semibold py-6">
+          <Button variant="outline" asChild className="font-semibold py-6">
             <Link href="/guestlist">
               <ChevronLeftCircleIcon />
               Go Back
@@ -239,8 +244,8 @@ const GuestlistForm = (props: GuestlistFormProps) => {
           </Button>
         </Container>
       </form>
-
       <DeleteModal open={isDeleteModalOpen} handleDeleteGuest={handleDeleteGuest} handleIsOpen={handleIsDeleteModalOpen} />
+      {isLoading && <Loading />}
     </Container>
   );
 };

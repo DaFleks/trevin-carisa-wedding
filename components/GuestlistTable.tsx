@@ -11,6 +11,7 @@ import DeleteModal from "./DeleteModal";
 import { useToggle } from "@/hooks/useToggle";
 import { useState } from "react";
 import { Guest } from "@prisma/client";
+import Loading from "./aetherium/Loading/Loading";
 
 interface GuestlistTableProps {
   guests: Guest[];
@@ -19,14 +20,17 @@ interface GuestlistTableProps {
 const GuestlistTable = (props: GuestlistTableProps) => {
   const [currentDeleteId, setCurrentDeleteId] = useState<string>("");
   const [isDeleteModalOpen, handleIsDeleteModalOpen] = useToggle(false);
+  const [isLoading, handleIsLoading] = useToggle(false);
   const router = useRouter();
 
-  const handleDeleteGuest = async (id?: string) => {
+  const handleDeleteGuest = async () => {
+    handleIsLoading();
     const response = await fetch("/api/guestlist", { method: "DELETE", body: JSON.stringify({ id: currentDeleteId }) });
     const data = await response.json();
-    alert(data.message);
-    router.refresh();
+    handleIsLoading();
     handleIsDeleteModalOpen();
+    alert("User Deleted!");
+    router.refresh();
   };
 
   const handleDeleteModalWindow = (id: string) => {
@@ -111,6 +115,7 @@ const GuestlistTable = (props: GuestlistTableProps) => {
         </Table>
       </Container>
       <DeleteModal open={isDeleteModalOpen} handleIsOpen={handleIsDeleteModalOpen} handleDeleteGuest={handleDeleteGuest} />
+      {isLoading && <Loading />}
     </>
   );
 };
