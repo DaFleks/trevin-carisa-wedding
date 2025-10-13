@@ -8,6 +8,7 @@ import { UserPlusIcon } from "lucide-react";
 import Link from "next/link";
 
 export const revalidate = 0; // 👈 always fetch live DB data
+export const fetchCache = "force-no-store";
 
 const page = async ({ searchParams }: { searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) => {
 

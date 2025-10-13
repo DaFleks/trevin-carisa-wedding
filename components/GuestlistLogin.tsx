@@ -20,13 +20,10 @@ const GuestlistLogin = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    let response;
-    try {
-      response = signIn("credentials", { password: password });
-    } catch (error) {
-      console.log("test");
-      console.log(error);
-    }
+
+    const response = await fetch("/api/auth", { method: "POST", body: JSON.stringify({ password: password }) });
+    const data = await response.json();
+    if (data.status === 201) router.push("/guestlist");
   }
 
   return (
