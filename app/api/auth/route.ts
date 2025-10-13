@@ -1,7 +1,7 @@
-import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
-import bcrypt from "bcryptjs";
 import { cookies } from "next/headers";
+import bcrypt from "bcryptjs";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: Request) {
   const { password } = await req.json();
@@ -10,7 +10,7 @@ export async function POST(req: Request) {
   if (!store) return NextResponse.json({ message: "Auth store not found.", status: 500 });
 
   const isValid = await bcrypt.compare(password, store.hashedPassword);
-  if (!isValid) return NextResponse.json({ message: "Wrong Password.", status: 401 });
+  if (!isValid) return NextResponse.json({ message: "Wrong password mf." });
 
   const session = await prisma.session.create({ data: { expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24) } });
 
@@ -25,12 +25,14 @@ export async function POST(req: Request) {
 }
 
 export async function DELETE(req: Request) {
-  const currentSessionId = (await cookies()).get("session_id")?.value;
-  console.log(currentSessionId);
-  if (!currentSessionId) return NextResponse.json({ message: "You are already logged out." });
+  const cookieStore = await cookies();
+  const session_id = cookieStore.get("session_id")?.value;
+
+  if (!session_id) return NextResponse.json({ message: "You are already logged out." });
 
   try {
-    await prisma.session.delete({ where: { id: currentSessionId } });
+    await prisma.session.delete({ where: { id: session_id } });
+    cookieStore.delete("session_id");
   } catch (error) {
     return NextResponse.json({ message: "There was an error." });
   }

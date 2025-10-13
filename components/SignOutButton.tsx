@@ -2,23 +2,31 @@
 
 import { Button } from "./ui/button";
 import { LogOutIcon } from "lucide-react";
-import prisma from "@/lib/prisma";
-import { NextResponse } from "next/server";
 import { useRouter } from "next/navigation";
+import Loading from "./aetherium/Loading/Loading";
+import { useToggle } from "@/hooks/useToggle";
 
 const SignOutButton = () => {
+  const [isLoading, handleIsLoading] = useToggle(false);
   const router = useRouter();
+
   return (
-    <Button
-      variant="outline"
-      onClick={async () => {
-        const response = await fetch("/api/auth", { method: "DELETE" });
-        const data = await response.json();
-        router.refresh();
-      }}>
-      <LogOutIcon />
-      Sign Out
-    </Button>
+    <>
+      <Button
+        variant="outline"
+        onClick={async () => {
+          handleIsLoading();
+          const response = await fetch("/api/auth", { method: "DELETE" });
+          const data = await response.json();
+          handleIsLoading();
+          if (data.status === 201) router.refresh();
+          if (data.status !== 201) alert("There was an error logging out.");
+        }}>
+        <LogOutIcon />
+        Sign Out
+      </Button>
+      {isLoading && <Loading />}
+    </>
   );
 };
 

@@ -1,29 +1,39 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { AlertTriangleIcon, LogInIcon } from "lucide-react";
-import Container from "./aetherium/Container";
-import Text from "./aetherium/Text";
+
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+
+import Container from "./aetherium/Container";
+import Text from "./aetherium/Text";
 import Loading from "./aetherium/Loading/Loading";
+
 import { useToggle } from "@/hooks/useToggle";
-import { signIn } from "next-auth/react";
 
 const GuestlistLogin = () => {
+  //  Hooks
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, handleIsLoading] = useToggle(false);
   const router = useRouter();
 
+  //  Submit
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
+    handleIsLoading();
+
     const response = await fetch("/api/auth", { method: "POST", body: JSON.stringify({ password: password }) });
     const data = await response.json();
+
+    handleIsLoading();
+
     if (data.status === 201) router.push("/guestlist");
+    if (data.status !== 201) setError(data.message);
   }
 
   return (
