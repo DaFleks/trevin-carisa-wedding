@@ -8,3 +8,11 @@ export function cn(...inputs: ClassValue[]) {
 export function wait(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export async function fetchWithLoading(handleIsLoading: () => void, input: string, init?: RequestInit | undefined) {
+  handleIsLoading();
+  const response = await fetch(input, init);
+  const data = await response.json();
+  handleIsLoading();
+  return data;
+}

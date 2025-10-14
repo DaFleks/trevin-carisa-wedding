@@ -6,12 +6,14 @@ import { motion, useAnimation } from "motion/react";
 import { ChevronDownIcon } from "lucide-react";
 import { Mrs_Saint_Delafield } from "next/font/google";
 
-import Container from "./aetherium/Container";
-import Text from "./aetherium/Text";
+import Container from "../aetherium/Container";
+import Text from "../aetherium/Text";
+
 import Intro from "./Intro";
 
 import { wait } from "@/lib/utils";
 import { useToggle } from "@/hooks/useToggle";
+
 import heroImage from "@/public/images/hero-background.webp";
 
 const cedarville = Mrs_Saint_Delafield({ weight: "400", subsets: ["latin"] });
@@ -85,12 +87,12 @@ const HeroSection = () => {
           </Container>
 
           <Container className="h-1/2 space-y-4 text-center flex flex-col justify-end">
-            <motion.h1
+            <motion.h6
               initial={{ y: 25, opacity: 0 }}
               animate={twoBecomeOneText}
               className={`${cedarville.className} text-[3rem] sm:text-[3rem] h-[60px] overflow-hidden`}>
               Two Become One
-            </motion.h1>
+            </motion.h6>
 
             <motion.div
               initial={{ y: 50, opacity: 0 }}
