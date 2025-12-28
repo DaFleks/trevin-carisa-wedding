@@ -10,15 +10,18 @@ const WeddingWrapper = () => {
   const [isVerified, handleIsVerified] = useToggle(false);
 
   return (
-    <>
-      {isVerified ? (
-        <WeddingProvider>
-          <WeddingApp />
-        </WeddingProvider>
-      ) : (
-        <VerificationGate handleIsVerified={handleIsVerified} />
-      )}
-    </>
+    // <>
+    //   {isVerified ? (
+    //     <WeddingProvider>
+    //       <WeddingApp />
+    //     </WeddingProvider>
+    //   ) : (
+    //     <VerificationGate handleIsVerified={handleIsVerified} />
+    //   )}
+    // </>
+    <WeddingProvider>
+      <WeddingApp />
+    </WeddingProvider>
   );
 };
 

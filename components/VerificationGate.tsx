@@ -47,7 +47,7 @@ const VerificationGate = (props: VerificationGateProps) => {
   return (
     <Section
       imageSrc={loginBg.src}
-      imagePosition="43% 50%"
+      imagePosition="48% 50%"
       className="text-white flex flex-col justify-center text-center gap-8 xl:w-1/4 mx-auto">
       <h1 className={`text-7xl ${tangerine.className}`}>{formMessage[0] === "B" ? "Welcome!" : "Thanks!"}</h1>
 

@@ -9,11 +9,12 @@ import { Mrs_Saint_Delafield } from "next/font/google";
 import Container from "../aetherium/Container";
 import Text from "../aetherium/Text";
 
+import Intro from "@/components/sections/Intro";
+
 import { wait } from "@/lib/utils";
 import { useToggle } from "@/hooks/useToggle";
 
 import heroImage from "@/public/images/hero-background.webp";
-import Intro from "@/components/sections/Intro";
 
 const cedarville = Mrs_Saint_Delafield({ weight: "400", subsets: ["latin"] });
 

@@ -38,7 +38,7 @@ const GuestlistLogin = () => {
 
   return (
     <>
-      <Container className="bg-white w-1/3 h-[500px] flex flex-col justify-center mx-auto p-8 space rounded border shadow-lg text-center">
+      <Container className="bg-white w-1/4 aspect-square flex flex-col justify-center mx-auto p-8 space rounded border shadow-lg text-center">
         <AlertTriangleIcon className="w-12 h-12 mx-auto text-red-900 mb-4" />
         <h3 className="text-xl font-bold mb-4">Guestlist Login</h3>
         <Text className="text-sm mb-8">
