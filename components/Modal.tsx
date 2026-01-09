@@ -2,7 +2,6 @@
 
 import { cn } from "@/lib/utils";
 import Container from "./aetherium/Container";
-import OverlayContainer from "./OverlayContainer";
 
 interface ModalProps {
   children?: React.ReactNode;

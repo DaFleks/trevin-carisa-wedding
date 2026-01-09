@@ -19,8 +19,8 @@ import heroImage from "@/public/images/hero-background.webp";
 const cedarville = Mrs_Saint_Delafield({ weight: "400", subsets: ["latin"] });
 
 const HeroSection = () => {
-  const [isIntroAlmostComplete, handleIsIntroAlmostComplete] = useToggle(true);
-  const [isIntroPlaying, handleIsIntroPlaying] = useToggle(true);
+  const [isIntroAlmostComplete, handleIsIntroAlmostComplete] = useToggle(false);
+  // const [isIntroPlaying, handleIsIntroPlaying] = useToggle(true);
 
   const trevinText = useAnimation();
   const andText = useAnimation();
@@ -52,7 +52,7 @@ const HeroSection = () => {
 
   return (
     <>
-      {isIntroPlaying && <Intro handleIsIntroAlmostComplete={handleIsIntroAlmostComplete} handleIsIntroPlaying={handleIsIntroPlaying} />}
+      {/* {isIntroPlaying && <Intro handleIsIntroAlmostComplete={handleIsIntroAlmostComplete} handleIsIntroPlaying={handleIsIntroPlaying} />} */}
       <Container as="section" className="z-40 relative h-full bg-cover">
         <Image
           src={heroImage.src}
