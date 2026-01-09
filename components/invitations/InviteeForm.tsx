@@ -39,6 +39,7 @@ const InviteeForm = (props: InviteeFormProps) => {
   const handleCreateInvitee = async (e: FormEvent) => {
     e.preventDefault();
     await createInvitee(props.invitationId, name, email, isAttending, isChild, meal);
+    resetForm();
     router.refresh();
   };
 
@@ -47,7 +48,7 @@ const InviteeForm = (props: InviteeFormProps) => {
     props.handleSelectCurrentInvitee();
     await updateInviteeById(props.invitee!.id, name, email, isAttending, isChild, meal);
     resetForm();
-        router.refresh();
+    router.refresh();
   };
 
   const resetForm = () => {

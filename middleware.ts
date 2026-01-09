@@ -15,7 +15,7 @@ export function middleware(req: NextRequest) {
   }
 
   // 🔒 Protect all other /guestlist routes
-  if (pathname.startsWith("/guestlist")) {
+  if (pathname.startsWith("/invitations")) {
     const sessionId = req.cookies.get("session_id")?.value;
 
     if (!sessionId) {
@@ -31,5 +31,6 @@ export function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/guestlist/:path*", // protect /guestlist/*
+    "/invitations/:path*", // protect /guestlist/*
   ],
 };

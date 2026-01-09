@@ -23,6 +23,7 @@ model Invitation {
   title     String
   guests    Guest[]
   note      String?
+  rsvp      Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -36,6 +37,8 @@ model Guest {
   isAttending  Boolean     @default(false)
   isChild      Boolean     @default(false)
   meal         MealOptions @default(BEEF)
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 enum MealOptions {

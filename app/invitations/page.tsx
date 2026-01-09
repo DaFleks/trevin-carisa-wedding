@@ -7,21 +7,31 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import prisma from "@/lib/prisma";
 import Link from "next/link";
 
+export const revalidate = 0; // 👈 always fetch live DB data
+export const fetchCache = "force-no-store";
+
 const page = async () => {
-  const invitations = await prisma.invitation.findMany({ include: { guests: { orderBy: { name: "desc" } } } });
+  const invitations = await prisma.invitation.findMany({ include: { guests: true } });
 
   return (
     <>
       <h6 className="text-4xl font-medium">Invite List</h6>
-      <ul className="space-y-4 ">
+      <ul className="space-y-4 overflow-y-auto pr-4">
         {invitations.map((i) => (
           <li key={i.id} className="border list-none bg-white rounded-xl shadow">
             <Container className="p-4 space-y-8">
               <Container className="flex items-center justify-between">
                 <Text className="font-medium text-2xl">{i.title}</Text>
-                <Button asChild className="bg-slate-600 hover:bg-slate-600/90 w-fit">
-                  <Link href={`/invitations/${i.id}`}>Edit Invitation</Link>
-                </Button>
+
+                <Container className="flex items-center gap-4">
+                  {i.rsvp && (
+                    <Container className="font-medium bg-emerald-400/25 text-emerald-800 select-none p-3 rounded-lg">RSVP Confirmed!</Container>
+                  )}
+                  {!i.rsvp && <Container className="font-medium bg-rose-400/25 text-rose-800 select-none p-3 rounded-lg">No RSVP Yet!</Container>}
+                  <Button asChild className="bg-slate-600 hover:bg-slate-600/90 w-fit">
+                    <Link href={`/invitations/${i.id}`}>Edit Invitation</Link>
+                  </Button>
+                </Container>
               </Container>
               <Table>
                 <TableHeader>
@@ -52,6 +62,10 @@ const page = async () => {
                   ))}
                 </TableBody>
               </Table>
+              <Container className="space-y-2">
+                <Text className="text-xl font-medium">Notes</Text>
+                <Text>{i.note}</Text>
+              </Container>
             </Container>
           </li>
         ))}

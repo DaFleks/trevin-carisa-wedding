@@ -19,7 +19,6 @@ const Sidebar = () => {
         <li>
           <Link href="/invitations/add">Add New Invitation</Link>
         </li>
-        <li></li>
       </ul>
     </Container>
   );

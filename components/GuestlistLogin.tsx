@@ -32,7 +32,7 @@ const GuestlistLogin = () => {
 
     handleIsLoading();
 
-    if (data.status === 201) router.push("/guestlist");
+    if (data.status === 201) router.push("/invitations");
     if (data.status !== 201) setError(data.message);
   }
 
