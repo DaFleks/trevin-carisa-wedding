@@ -13,6 +13,7 @@ import { Button } from "../ui/button";
 
 import categoryTwo from "@/public/images/category-2.webp";
 import sectionTwo from "@/public/images/section-2.webp";
+import RSVPModal from "../RSVPModal";
 
 const TheBigDay = () => {
   const { tangerineFont } = useWeddingContext();
@@ -41,6 +42,7 @@ const TheBigDay = () => {
         </Text>
         <ScrollDownIcon text="ACCOMODATIONS" />
       </Section>
+      <RSVPModal />
     </>
   );
 };
