@@ -1,15 +1,15 @@
 
-import * as guests from "@/lib/guestData.json";
-import { Prisma, PrismaClient } from "@prisma/client";
+// import * as guests from "@/lib/guestData.json";
+// import { Prisma, PrismaClient } from "@prisma/client";
 
-const prisma = new PrismaClient();
+// const prisma = new PrismaClient();
 
-const userData: Prisma.GuestCreateInput[] = guests;
+// const userData: Prisma.GuestCreateInput[] = guests;
 
-export async function main() {
-  for (const u of userData) {
-    await prisma.guest.create({ data: u });
-  }
-}
+// export async function main() {
+//   for (const u of userData) {
+//     await prisma.guest.create({ data: u });
+//   }
+// }
 
-main();
+// main();
