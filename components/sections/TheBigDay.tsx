@@ -14,9 +14,12 @@ import { Button } from "../ui/button";
 import categoryTwo from "@/public/images/category-2.webp";
 import sectionTwo from "@/public/images/section-2.webp";
 import RSVPModal from "../RSVPModal";
+import { useToggle } from "@/hooks/useToggle";
 
 const TheBigDay = () => {
   const { tangerineFont } = useWeddingContext();
+  const [isRsvpOpen, toggleIsRsvpOpen] = useToggle(false);
+
   return (
     <>
       <Category title="The Big Day" imageSrc={categoryTwo.src} imagePosition="100% 50%">
@@ -34,7 +37,7 @@ const TheBigDay = () => {
         <Text className="text-sm mb-8 font-bold">FOLLOWED BY COCKTAIL HOUR AND DINNER AT:</Text>
         <h2 className={`text-5xl mb-16 ${tangerineFont}`}>The Trillium Hall</h2>
 
-        <Button variant="outline" className="mb-4">
+        <Button variant="outline" className="mb-4 md:w-1/4 mx-auto" onClick={toggleIsRsvpOpen}>
           RSVP NOW
         </Button>
         <Text className="text-xs mb-42">
@@ -42,7 +45,7 @@ const TheBigDay = () => {
         </Text>
         <ScrollDownIcon text="ACCOMODATIONS" />
       </Section>
-      <RSVPModal />
+      {isRsvpOpen && <RSVPModal toggleIsRsvpOpen={toggleIsRsvpOpen} />}
     </>
   );
 };

@@ -1,23 +1,26 @@
 "use client";
 
-import { HeartIcon } from "lucide-react";
 import Container from "../aetherium/Container";
-import Text from "../aetherium/Text";
 import Link from "next/link";
+import { Button } from "../ui/button";
+import SignOutButton from "../SignOutButton";
 
 const Sidebar = () => {
   return (
     <Container className="w-64 bg-neutral-200 p-4 border-r  space-y-8">
-      <Container className="flex items-center gap-2 select-none">
-        <HeartIcon />
-        <Text className="text-2xl font-medium">T&C Guestlist</Text>
-      </Container>
-      <ul className="space-y-4 font-medium">
+      <ul className="space-y-4 font-medium size-full relative">
         <li>
-          <Link href="/invitations">Invite List</Link>
+          <Button variant="secondary" asChild>
+            <Link href="/invitations">Invite List</Link>
+          </Button>
         </li>
         <li>
-          <Link href="/invitations/add">Add New Invitation</Link>
+          <Button variant="secondary" asChild>
+            <Link href="/invitations/add">Add New Invitation</Link>
+          </Button>
+        </li>
+        <li className="absolute bottom-0 w-full">
+          <SignOutButton />
         </li>
       </ul>
     </Container>

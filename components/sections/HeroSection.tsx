@@ -64,23 +64,20 @@ const HeroSection = () => {
         />
         <Container className="bg-black/40 absolute top-0 left-0 w-full h-full flex flex-col justify-between">
           <Container className="h-1/2 flex items-center">
-            <Container className={`relative h-[250px] w-full text-[6rem] ${cedarville.className}`}>
-              <motion.h1
-                initial={{ scale: 2, opacity: 0 }}
-                animate={trevinText}
-                className="absolute top-0 sm:top-8 left-1/4 -translate-x-1/4">
+            <Container
+              className={`relative h-[250px] w-full text-[6rem] ${cedarville.className}
+            sm:text-[8rem] md:text-[10rem] sm:-top-24`}>
+              <motion.h1 initial={{ scale: 2, opacity: 0 }} animate={trevinText} className="absolute top-0 sm:top-8 left-1/4 -translate-x-1/4">
                 Trevin
               </motion.h1>
               <motion.h1
                 initial={{ scale: 2, opacity: 0 }}
                 animate={andText}
-                className="absolute top-25 sm:top-40 left-1/2 -translate-x-1/2 text-[3rem] sm:text-[4rem]">
+                className="absolute top-25 sm:top-40 left-1/2 -translate-x-1/2 text-[3rem] 
+                sm:text-[4rem] md:text-[6rem]">
                 &
               </motion.h1>
-              <motion.h1
-                initial={{ scale: 2, opacity: 0 }}
-                animate={carisaText}
-                className="absolute top-34 sm:top-52 right-1/4 translate-x-1/4">
+              <motion.h1 initial={{ scale: 2, opacity: 0 }} animate={carisaText} className="absolute top-34 sm:top-52 right-1/4 translate-x-1/4">
                 Carisa
               </motion.h1>
             </Container>
@@ -94,10 +91,7 @@ const HeroSection = () => {
               Two Become One
             </motion.h6>
 
-            <motion.div
-              initial={{ y: 50, opacity: 0 }}
-              animate={dateText}
-              className="font-semibold grid grid-cols-3 gap-4 items-center px-10 mb-8">
+            <motion.div initial={{ y: 50, opacity: 0 }} animate={dateText} className="font-semibold grid grid-cols-3 gap-4 items-center px-10 mb-8">
               <Text className="border-y py-4">SATURDAY</Text>
               <Container>
                 <Text>MAY</Text>

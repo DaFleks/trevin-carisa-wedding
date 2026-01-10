@@ -38,22 +38,19 @@ const GuestlistLogin = () => {
 
   return (
     <>
-      <Container className="bg-white w-1/4 aspect-square flex flex-col justify-center mx-auto p-8 space rounded border shadow-lg text-center">
+      <Container className="bg-white w-1/5 aspect-square flex flex-col justify-center mx-auto p-8 space rounded border shadow-lg text-center">
         <AlertTriangleIcon className="w-12 h-12 mx-auto text-red-900 mb-4" />
         <h3 className="text-xl font-bold mb-4">Guestlist Login</h3>
         <Text className="text-sm mb-8">
-          For access to the <b>Guestlist</b>, please enter the password you were provided with.
+          For access to the <b>Guestlist</b>, <br />
+          please enter the password you were provided with.
         </Text>
         <form className="space-y-4" onSubmit={handleSubmit}>
           <Container className="space-y-4">
             <Label htmlFor="password">Password</Label>
             <Input type="password" id="password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
           </Container>
-          {error ? (
-            <Text className="text-xs text-red-900 text-start font-bold">{error}</Text>
-          ) : (
-            <Text className="text-white text-xs">**</Text>
-          )}
+          {error ? <Text className="text-xs text-red-900 text-start font-bold">{error}</Text> : <Text className="text-white text-xs">**</Text>}
           <Button className="w-full font-bold py-6">
             <LogInIcon /> Log In
           </Button>

@@ -10,7 +10,7 @@ export function middleware(req: NextRequest) {
   }
 
   // ✅ Allow the login page
-  if (pathname === "/guestlist/login") {
+  if (pathname === "/login") {
     return NextResponse.next();
   }
 
@@ -20,7 +20,7 @@ export function middleware(req: NextRequest) {
 
     if (!sessionId) {
       console.log("redirect");
-      return NextResponse.redirect(new URL("/guestlist/login", req.url));
+      return NextResponse.redirect(new URL("/login", req.url));
     }
   }
 

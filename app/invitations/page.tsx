@@ -25,9 +25,9 @@ const page = async () => {
 
                 <Container className="flex items-center gap-4">
                   {i.rsvp && (
-                    <Container className="font-medium bg-emerald-400/25 text-emerald-800 select-none p-3 rounded-lg">RSVP Confirmed!</Container>
+                    <Container className="w-48 text-center font-medium bg-emerald-400/25 text-emerald-800 select-none p-3 rounded-lg">RSVP Confirmed!</Container>
                   )}
-                  {!i.rsvp && <Container className="font-medium bg-rose-400/25 text-rose-800 select-none p-3 rounded-lg">No RSVP Yet!</Container>}
+                  {!i.rsvp && <Container className="w-48 text-center font-medium bg-rose-400/25 text-rose-800 select-none p-3 rounded-lg">No RSVP Yet!</Container>}
                   <Button asChild className="bg-slate-600 hover:bg-slate-600/90 w-fit">
                     <Link href={`/invitations/${i.id}`}>Edit Invitation</Link>
                   </Button>

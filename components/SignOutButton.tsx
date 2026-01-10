@@ -13,7 +13,7 @@ const SignOutButton = () => {
   return (
     <>
       <Button
-        variant="outline"
+        className="bg-indigo-700 hover:bg-indigo-700/90"
         onClick={async () => {
           handleIsLoading();
           const response = await fetch("/api/auth", { method: "DELETE" });

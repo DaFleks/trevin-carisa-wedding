@@ -10,7 +10,7 @@ interface ModalProps {
 
 const Modal = (props: ModalProps) => {
   return (
-    <Container className="fixed h-full w-full bg-black/50 top-0 left-0 z-10 flex justify-center items-center">
+    <Container className="fixed h-full w-full bg-black/50 top-0 left-0 z-50 flex justify-center items-center">
       <Container className={cn("bg-white p-8 rounded-lg", props.className)}>{props.children}</Container>
     </Container>
   );

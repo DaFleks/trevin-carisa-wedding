@@ -7,7 +7,7 @@ import prisma from "@/lib/prisma";
 
 const page = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const invitation = await prisma.invitation.findFirst({ where: { id: id }, include: { guests: { orderBy: { name: "asc" } } } });
+  const invitation = await prisma.invitation.findFirst({ where: { id: id }, include: { guests: { orderBy: { createdAt: "asc" } } } });
 
   return (
     <>
