@@ -9,7 +9,7 @@ import { useToggle } from "@/hooks/useToggle";
 const WeddingWrapper = () => {
   const [isVerified, handleIsVerified] = useToggle(false);
 
-  return <WeddingProvider>{!isVerified ? <WeddingApp /> : <VerificationGate handleIsVerified={handleIsVerified} />}</WeddingProvider>;
+  return <WeddingProvider>{isVerified ? <WeddingApp /> : <VerificationGate handleIsVerified={handleIsVerified} />}</WeddingProvider>;
 };
 
 export default WeddingWrapper;
